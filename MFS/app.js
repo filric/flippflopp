@@ -8,7 +8,7 @@ const clientDir = __dirname + "\\client\\"
 app.use(express.json())
 app.use(express.urlencoded())
 
-app.get('/', (req, res) => res.sendFile(clientDir + "index.html"))
+app.get('/', (req, res) => res.sendFile(lientDir + "index.html"))
 
 app.get('/style.css', (req, res) => {
   res.sendFile(clientDir + 'style.css')
@@ -24,4 +24,20 @@ app.post('/', (req, res) => {
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+});
+
+const personSchema = new mongoose.Schema({
+  name: String,
+  email: String
+  
+});
+
+const Person = mongoose.model('Person', personSchema);
 

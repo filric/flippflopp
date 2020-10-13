@@ -6,35 +6,33 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 });
 
-const kittySchema = new mongoose.Schema({
-    name: String
-  });
+const personSchema = new mongoose.Schema({
+    name: String,
+    age: Number
+    
+});
 
-  const Kitten = mongoose.model('Kitten', kittySchema);
-
-  const silence = new Kitten({ name: 'Silence' });
-console.log(silence.name); 
-
-kittySchema.methods.speak = function () {
-    const greeting = this.name
-      ? "Meow name is " + this.name
-      : "I don't have a name";
-    console.log(greeting);
+  personSchema.methods.speak = () => {
+    console.log("Hej");
+    console.log(presentation);
   }
-  
-  const Kitten = mongoose.model('Kitten', kittySchema);
 
-  const fluffy = new Kitten({ name: 'fluffy' });
-fluffy.speak();
+  const Person = mongoose.model('Person', personSchema);
 
-fluffy.save(function (err, fluffy) {
+  const niklas = new Person({ name: 'Niklas', age: 33 });
+  const david = new Person({ name: 'David', age: 18 });
+  const hugo = new Person({ name: 'Hugo', age: 18 });
+  const rasmus = new Person({ name: 'Rasmus', age: 18 });
+
+  niklas.save();
+  davis.save();
+  hugo.save();
+  rasmus.save();
+
+
+  Person.find(function (err, people) {
     if (err) return console.error(err);
-    fluffy.speak();
-  });
+    console.log(people);
 
-  Kitten.find(function (err, kittens) {
-    if (err) return console.error(err);
-    console.log(kittens);
+
   })
-
-  Kitten.find({ name: /^fluff/ }, callback);
